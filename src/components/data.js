@@ -1,60 +1,67 @@
-// import { useState,useEffect } from "react";
-// // import {useParams} from "react-router-dom"
-// import axios from "axios";
-// import { useParams } from "react-router-dom";
+import { useState,useEffect } from "react";
 
 
-export default function Data(props){
-  return <h1>test</h1>
+
+
+export default function Data({data,info,setInfo}){
+const handleClick=()=>{
+  data.map(element=>{
+    setInfo({...info,["content"]:element.answer,["type"]:"Answer", ["symbol"]:"."})
+
+  })
+
 }
-// const [state, setState]=useState([])
-// const {id}=useParams()
-
-// useEffect(()=>{
-    
-//   (async ()=>{
-// try{
-//     const response=await axios.get(`http://jservice.io/api/random`)
-//     setState(response.data)
-// }catch(err){
-//     console.log(err)
-// }
-//   })()
-// },[])
 
 
-//  return(
-//      <>
-//    {
-//        state.map(element=>(
-//          <div>
-//            <h1>The Category is {element.category.title}</h1>
-//            <h2>The question is:{element.question} </h2>   
-//            <h3>The answer{element.answer}</h3>
-//            <h4>Points:{element.value}</h4>
-//            </div>
-//        ))
-//    }
-//           </>
-//  )
+const revealQuestion=()=>{
+  data.map(element=>{
+    setInfo({...info,["content"]:element.question,["type"]:"Question", ["symbol"]:"?"})
 
-// }
-//  const {id}=useParams()
+  })
 
-// useEffect(()=>{ 
-//     (async ()=>{
-//         const response=  await fetch(`http://jservice.io/api/random`);
-//         const data=response.json();
-//         element(data)
+}
 
-//     }) ()
-  
-     
-  
+
+
+
+ return(
+     <>
+   {
+       data.map(element=>(
+         <div>
+           <h1>the category:{element.category.title}</h1>
+           <h2>{info.type}:{info.content} {info.symbol} </h2>   
           
-//    }, [])
+           <h4>Points:{element.value}</h4>
+           {
+             info.type==="Question"?   <button className="revealanswer" onClick={handleClick}>Reveal answer</button>:
+             <button className="revealquestion" onClick={revealQuestion}>Reveal Question</button>
+           }
+         
+           
+          
+           </div>
+       ))
+   }
+          </>
+ )
+  }
 
 
-//      )
-   
+//  <div>
+//  <h1>the category:{data.category.title}</h1>
+//  <h2>{info.type}:{info.content} </h2>   
 
+//  <h4>Points:{data.value}</h4>
+//  <button >Reveal answer</button>
+//  </div>
+// }
+
+
+
+
+
+
+
+
+// <h3>the answer:{element.answer}</h3>
